@@ -78,38 +78,25 @@ function App() {
     </>
   }
   return (
-    <Flex padding={"medium"} >
-      <main>
-        <Heading level={1} children="FlexiFit Feedback" alignSelf={"center"}></Heading>
 
-        <Tabs defaultValue="Renewals" justifyContent={"stretch"}
-          items={[
-            { label: 'Renewals', value: 'renewal', content: (getRenewals()) },
-            { label: 'RenewalForm', value: 'RenewalForm', content: (getForm()) },
+     <Flex padding={"medium"} >
+      <Authenticator>
+        {({ signOut }) => (
+          <main>
+            <Heading level={1} children="Renewals" alignSelf={"center"}></Heading>
 
-          ]}
-        />
-      </main>
+            <Link children="Signout" onClick={signOut} alignSelf={"end"} />
+              <Tabs defaultValue="Renewals" justifyContent={"stretch"}
+                items={[
+                   { label: 'Renewals', value: 'renewal', content: (getRenewals()) },
+                    { label: 'RenewalForm', value: 'RenewalForm', content: (getForm()) },
+
+                ]}
+              />
+          </main>
+        )}
+      </Authenticator>
     </Flex>
-
-    //  <Flex padding={"medium"} >
-    //   <Authenticator>
-    //     {({ signOut }) => (
-    //       <main>
-    //         <Heading level={1} children="FlexiFit Feedback" alignSelf={"center"}></Heading>
-
-    //         <Link children="Signout" onClick={signOut} alignSelf={"end"} />
-    //           <Tabs defaultValue="Renewals" justifyContent={"stretch"}
-    //             items={[
-    //                { label: 'Renewals', value: 'renewal', content: (getRenewals()) },
-    //                 { label: 'RenewalForm', value: 'RenewalForm', content: (getForm()) },
-
-    //             ]}
-    //           />
-    //       </main>
-    //     )}
-    //   </Authenticator>
-    // </Flex>
 
   );
 }
