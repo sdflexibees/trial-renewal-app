@@ -27,8 +27,8 @@ function App() {
   function updateRenewals(id: any) {
     return <>
       <Heading level={5}> Fill the form based on your feedback from the interview. </Heading>
-      <Flex id="Create"  >
-        <JobRenewalsUpdateForm />
+      <Flex id="Update"  >
+        <JobRenewalsUpdateForm jobRenewals={jobRenewals.find((renewal) => renewal.id === id)} />
       </Flex>
     </>
   }
