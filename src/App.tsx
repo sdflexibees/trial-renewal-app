@@ -35,7 +35,7 @@ function App() {
   function getRenewals() {
     return <>
       <Flex id="Renewals"  >
-        <Table isPaginated={true} isSearchable={true} >
+        <Table  >
           <TableHead>
             <TableRow>
               <TableCell>Job ID</TableCell>
