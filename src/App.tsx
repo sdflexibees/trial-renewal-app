@@ -24,82 +24,94 @@ function App() {
   useEffect(() => {
     fetchJobRenewals();
   }, []);
-function updateRenewals(id: any) {
-   return <>
-    <Heading level={5}> Fill the form based on your feedback from the interview. </Heading>
-    <Flex id="Create"  >
-      <JobRenewalsUpdateForm />
-    </Flex>
-  </>
-}
-function getRenewals() {
-  return <>
-    <Flex id="Renewals"  >
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Job ID</TableCell>
-            <TableCell>Date of Renewal</TableCell>
-            <TableCell>Renewal Period</TableCell>
-            <TableCell>New Client Pricing</TableCell>
-            <TableCell>New Candidate Pricing</TableCell>
-            <TableCell>New Hours</TableCell>
-            <TableCell>Action</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {jobRenewals.map((renewal) => (
-
-            <TableRow key={renewal.id}>
-              <TableCell>{renewal.job_id}</TableCell>
-              <TableCell>{renewal.date_of_renewal}</TableCell>
-              <TableCell>{renewal.renewal_period}</TableCell>
-              <TableCell>{renewal.new_client_pricing}</TableCell>
-              <TableCell>{renewal.new_candidate_pricing}</TableCell>
-              <TableCell>{renewal.new_hours}</TableCell>
-
-              <TableCell>
-                <Button onClick={() => updateRenewals(renewal.id)}>Update first</Button>
-              </TableCell>
+  function updateRenewals(id: any) {
+    return <>
+      <Heading level={5}> Fill the form based on your feedback from the interview. </Heading>
+      <Flex id="Create"  >
+        <JobRenewalsUpdateForm />
+      </Flex>
+    </>
+  }
+  function getRenewals() {
+    return <>
+      <Flex id="Renewals"  >
+        <Table isPaginated={true} isSearchable={true} >
+          <TableHead>
+            <TableRow>
+              <TableCell>Job ID</TableCell>
+              <TableCell>Date of Renewal</TableCell>
+              <TableCell>Renewal Period</TableCell>
+              <TableCell>New Client Pricing</TableCell>
+              <TableCell>New Candidate Pricing</TableCell>
+              <TableCell>New Hours</TableCell>
+              <TableCell>Action</TableCell>
             </TableRow>
+          </TableHead>
+          <TableBody>
+            {jobRenewals.map((renewal) => (
 
-          ))}
-        </TableBody>
-      </Table>
+              <TableRow key={renewal.id}>
+                <TableCell>{renewal.job_id}</TableCell>
+                <TableCell>{renewal.date_of_renewal}</TableCell>
+                <TableCell>{renewal.renewal_period}</TableCell>
+                <TableCell>{renewal.new_client_pricing}</TableCell>
+                <TableCell>{renewal.new_candidate_pricing}</TableCell>
+                <TableCell>{renewal.new_hours}</TableCell>
+
+                <TableCell>
+                  <Button onClick={() => updateRenewals(renewal.id)}>Update first</Button>
+                </TableCell>
+              </TableRow>
+
+            ))}
+          </TableBody>
+        </Table>
+      </Flex>
+    </>
+  }
+  function getForm() {
+    return <>
+      <Heading level={5}> Fill the form based on your feedback from the interview. </Heading>
+      <Flex id="RenewalForm"  >
+        <JobRenewalsCreateForm />
+      </Flex>
+    </>
+  }
+  return (
+    <Flex padding={"medium"} >
+      <main>
+        <Heading level={1} children="FlexiFit Feedback" alignSelf={"center"}></Heading>
+
+        <Tabs defaultValue="Renewals" justifyContent={"stretch"}
+          items={[
+            { label: 'Renewals', value: 'renewal', content: (getRenewals()) },
+            { label: 'RenewalForm', value: 'RenewalForm', content: (getForm()) },
+
+          ]}
+        />
+      </main>
     </Flex>
-  </>
-}
-function getForm() {
-  return <>
-    <Heading level={5}> Fill the form based on your feedback from the interview. </Heading>
-    <Flex id="RenewalForm"  >
-      <JobRenewalsCreateForm />
-    </Flex>
-  </>
-}
-return (
 
+    //  <Flex padding={"medium"} >
+    //   <Authenticator>
+    //     {({ signOut }) => (
+    //       <main>
+    //         <Heading level={1} children="FlexiFit Feedback" alignSelf={"center"}></Heading>
 
-     <Flex padding={"medium"} >
-      <Authenticator>
-        {({ signOut }) => (
-          <main>
-            <Heading level={1} children="FlexiFit Feedback" alignSelf={"center"}></Heading>
+    //         <Link children="Signout" onClick={signOut} alignSelf={"end"} />
+    //           <Tabs defaultValue="Renewals" justifyContent={"stretch"}
+    //             items={[
+    //                { label: 'Renewals', value: 'renewal', content: (getRenewals()) },
+    //                 { label: 'RenewalForm', value: 'RenewalForm', content: (getForm()) },
 
-            <Link children="Signout" onClick={signOut} alignSelf={"end"} />
-              <Tabs defaultValue="Renewals" justifyContent={"stretch"}
-                items={[
-                   { label: 'Renewals', value: 'renewal', content: (getRenewals()) },
-                    { label: 'RenewalForm', value: 'RenewalForm', content: (getForm()) },
-        
-                ]}
-              />
-          </main>
-        )}
-      </Authenticator>
-    </Flex>
-  
-);
+    //             ]}
+    //           />
+    //       </main>
+    //     )}
+    //   </Authenticator>
+    // </Flex>
+
+  );
 }
 
 export default withAuthenticator(App);
