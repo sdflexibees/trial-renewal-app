@@ -5,25 +5,25 @@ import { generateClient } from "aws-amplify/data";
 const client = generateClient<Schema>();
 
 function App() {
-  const [jobRenewals, setTodos] = useState<Array<Schema["Job_Renewals"]["type"]>>([]);
+  const [jobRenewals, setTodos] = useState<Array<Schema["JobRenewals"]["type"]>>([]);
 
   useEffect(() => {
-    client.models.Job_Renewals.observeQuery().subscribe({
+    client.models.JobRenewals.observeQuery().subscribe({
       next: (data) => setTodos([...data.items]),
     });
   }, []);
 
   function createTodo() {
-    client.models.Job_Renewals.create({ content: window.prompt("Todo content") });
+    client.models.JobRenewals.create({ notes: window.prompt("Todo content") });
   }
 
-  function updateTodo(id: string) {
-    client.models.Job_Renewals.update(id, { content: window.prompt("New todo content") });
+  function updateTodo(id: integer) {
+    client.models.JobRenewals.update(id, { content: window.prompt("New todo content") });
   }
 
   return (
     <main>
-      <h1>My todos</h1>
+      <h1>Job Renewals</h1>
       <button onClick={createTodo}> + new</button>
       <ul>
         {jobRenewals.map((renewal) => (
