@@ -18,19 +18,28 @@ function App() {
   }
 
   function updateTodo(id: integer) {
-    client.models.JobRenewals.update(id, { content: window.prompt("New todo content") });
+    client.models.JobRenewals.update(id, { notes: window.prompt("New todo content") });
   }
 
   return (
     <main>
       <h1>Job Renewals</h1>
       <button onClick={createTodo}> + new</button>
-      <ul>
+      <table>
         {jobRenewals.map((renewal) => (
-          <li key={renewal.id}>{renewal.notes}</li>
+          <tr key={renewal.id}>
+            <td>{renewal.job_id}</td>
+            <td>{renewal.date_of_renewal}</td>
+            <td>{renewal.renewal_period}</td>
+            <td>{renewal.new_candidate_pricing}</td>
+            <td>{renewal.new_hours}</td>
+            
+          <td>
+            <button onClick={() => updateTodo(renewal.id)}>Update first</button>
+          </td>
+            </tr>
         ))}
-      </ul>
-      <button onClick={() => updateTodo(jobRenewals[0]?.id)}>Update first</button>
+      </table>
     </main>
   );
 }
