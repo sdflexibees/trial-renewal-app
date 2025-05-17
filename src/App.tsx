@@ -5,34 +5,32 @@ import { generateClient } from "aws-amplify/data";
 const client = generateClient<Schema>();
 
 function App() {
-  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
+  const [jobRenewals, setTodos] = useState<Array<Schema["Job_Renewals"]["type"]>>([]);
 
   useEffect(() => {
-    client.models.Todo.observeQuery().subscribe({
+    client.models.Job_Renewals.observeQuery().subscribe({
       next: (data) => setTodos([...data.items]),
     });
   }, []);
 
   function createTodo() {
-    client.models.Todo.create({ content: window.prompt("Todo content") });
+    client.models.Job_Renewals.create({ content: window.prompt("Todo content") });
+  }
+
+  function updateTodo(id: string) {
+    client.models.Job_Renewals.update(id, { content: window.prompt("New todo content") });
   }
 
   return (
     <main>
       <h1>My todos</h1>
-      <button onClick={createTodo}>+ new</button>
+      <button onClick={createTodo}> + new</button>
       <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>{todo.content}</li>
+        {jobRenewals.map((renewal) => (
+          <li key={renewal.id}>{renewal.notes}</li>
         ))}
       </ul>
-      <div>
-        🥳 App successfully hosted. Try creating a new todo.
-        <br />
-        <a href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates">
-          Review next step of this tutorial.
-        </a>
-      </div>
+      <button onClick={() => updateTodo(jobRenewals[0]?.id)}>Update first</button>
     </main>
   );
 }
