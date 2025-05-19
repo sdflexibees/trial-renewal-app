@@ -67,19 +67,21 @@ function App() {
           </TableBody>
         </Table> */}
 
-          <Collection items={jobRenewals} type="list" isPaginated={true} isSearchable={true} itemsPerPage={5} column={3} row={5}>
-        {(item, index) =>
-          <Card key={index} backgroundColor={"inherit"} border={"brown"}>
-            Job Id: <Label children={item.job_id} /> , <p></p>
-            Date of Renewal: <Label children={item.date_of_renewal} /> , <p></p>
-            Renewal Period: <Label children={item.renewal_period} /> , <p></p>
-            New Client Pricing: <Label children={item.new_client_pricing} /> , <p></p>
-            New Candidate Pricing: <Label children={item.new_candidate_pricing} /> , <p></p>
-            New Hours: <Label children={item.new_hours} /> , <p></p>
-            Comment: <Label children={item.notes} /><p />
-          </Card>
-        }
-      </Collection>
+        <Collection items={jobRenewals} type="list" isPaginated={true} isSearchable={true} itemsPerPage={5} column={3} row={5}>
+          {(item, index) =>
+            <Card key={index} backgroundColor={"inherit"} border={"brown"}>
+              Job Id: <Label children={item.job_id} /> , <br></br>
+              Date of Renewal: <Label children={item.date_of_renewal} /> , <br></br>
+              Renewal Period: <Label children={item.renewal_period} /> , <br></br>
+              New Client Pricing: <Label children={item.new_client_pricing} /> , <br></br>
+              New Candidate Pricing: <Label children={item.new_candidate_pricing} /> , <br></br>
+              New Hours: <Label children={item.new_hours} /> , <br></br>
+              Comment: <Label children={item.notes} /> <br></br>
+              <p />
+              <Button onClick={() => updateRenewals(item.id)}>Update</Button>
+            </Card>
+          }
+        </Collection>
       </Flex>
     </>
   }
