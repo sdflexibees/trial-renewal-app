@@ -21,7 +21,7 @@ main {
 button {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+  padding: 0.6em 0.6em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
@@ -64,4 +64,9 @@ td:hover {
 a {
   font-weight: 800;
   text-decoration: none;
+}
+
+.amplify-grid{
+  display: grid;
+  gap: 20px;
 }

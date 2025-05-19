@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
-import { Authenticator, Button, Flex, Heading, Link, Table, TableBody, TableCell, TableHead, TableRow, Tabs, withAuthenticator } from "@aws-amplify/ui-react";
+import { Authenticator, Button, Card, Collection, Flex, Heading, Label, Link, Table, TableBody, TableCell, TableHead, TableRow, Tabs, withAuthenticator } from "@aws-amplify/ui-react";
 import JobRenewalsCreateForm from "./ui-components/JobRenewalsCreateForm";
 import JobRenewalsUpdateForm from "./ui-components/JobRenewalsUpdateForm";
 // import RenewalsTable from "./ui-components/RenewalsTable";
@@ -35,7 +35,7 @@ function App() {
   function getRenewals() {
     return <>
       <Flex id="Renewals"  >
-        <Table  >
+        {/* <Table  isPaginated={true} isSearchable={true} itemsPerPage={2} column={3} row={5}>
           <TableHead>
             <TableRow>
               <TableCell>Job ID</TableCell>
@@ -65,13 +65,26 @@ function App() {
 
             ))}
           </TableBody>
-        </Table>
+        </Table> */}
+
+          <Collection items={jobRenewals} type="list" isPaginated={true} isSearchable={true} itemsPerPage={5} column={3} row={5}>
+        {(item, index) =>
+          <Card key={index} backgroundColor={"inherit"} border={"brown"}>
+            Job Id: <Label children={item.job_id} /> , <p></p>
+            Date of Renewal: <Label children={item.date_of_renewal} /> , <p></p>
+            Renewal Period: <Label children={item.renewal_period} /> , <p></p>
+            New Client Pricing: <Label children={item.new_client_pricing} /> , <p></p>
+            New Candidate Pricing: <Label children={item.new_candidate_pricing} /> , <p></p>
+            New Hours: <Label children={item.new_hours} /> , <p></p>
+            Comment: <Label children={item.notes} /><p />
+          </Card>
+        }
+      </Collection>
       </Flex>
     </>
   }
   function getForm() {
     return <>
-      <Heading level={5}> Fill the form based on your feedback from the interview. </Heading>
       <Flex id="RenewalForm"  >
         <JobRenewalsCreateForm />
       </Flex>
@@ -79,20 +92,20 @@ function App() {
   }
   return (
 
-     <Flex padding={"medium"} >
+    <Flex padding={"medium"} >
       <Authenticator>
         {({ signOut }) => (
           <main>
             <Heading level={1} children="Renewals" alignSelf={"center"}></Heading>
 
             <Link children="Signout" onClick={signOut} alignSelf={"end"} />
-              <Tabs defaultValue="Renewals" justifyContent={"stretch"}
-                items={[
-                   { label: 'Renewals', value: 'renewal', content: (getRenewals()) },
-                    { label: 'RenewalForm', value: 'RenewalForm', content: (getForm()) },
-
-                ]}
-              />
+            <Tabs defaultValue="renewalForm" justifyContent={"stretch"}
+              items={[
+                { label: 'Renewals', value: 'renewal', content: (getRenewals()) },
+                { label: 'RenewalForm', value: 'renewalForm', content: (getForm()) },
+              ]}
+              isLazy
+            />
           </main>
         )}
       </Authenticator>
