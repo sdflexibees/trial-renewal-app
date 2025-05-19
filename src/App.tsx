@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
-import { Authenticator, Button, Card, Collection, Flex, Heading, Label, Link, Table, TableBody, TableCell, TableHead, TableRow, Tabs, withAuthenticator } from "@aws-amplify/ui-react";
+import { Authenticator, Button, Card, Collection, Flex, Heading, Label, Link, Tabs, withAuthenticator } from "@aws-amplify/ui-react";
 import JobRenewalsCreateForm from "./ui-components/JobRenewalsCreateForm";
 import JobRenewalsUpdateForm from "./ui-components/JobRenewalsUpdateForm";
 // import RenewalsTable from "./ui-components/RenewalsTable";
